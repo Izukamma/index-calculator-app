@@ -1,0 +1,16 @@
+# Local environment
+.env.local
+
+# Next.js build and dependencies
+.next/
+node_modules/
+
+# Local Next.js project files (keep it local, not on GitHub)
+app/
+components/
+public/
+package.json
+package-lock.json
+tsconfig.json
+vercel.json
+next-env.d.ts
