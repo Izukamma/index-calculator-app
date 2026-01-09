@@ -187,7 +187,7 @@
             rel="noopener"
           ></a>
 
-          <button onclick="copyLink()">Copy Link</button>
+          <button id="copyButton">Copy Link</button>
         </div>
       </div>
 
@@ -214,13 +214,35 @@
         const lotSize = dollarRisk / (stop * contract);
 
         document.getElementById("output").innerHTML = `
-        <div>Recommended Lot Size:</div>
-        <strong>${lotSize.toFixed(2)} lots</strong>
-        <div style="margin-top:8px;color:#9ca3af;">
-          Dollar Risk: $${dollarRisk.toFixed(2)}
-        </div>
-      `;
+    <div>Recommended Lot Size:</div>
+    <strong>${lotSize.toFixed(2)} lots</strong>
+    <div style="margin-top:8px;color:#9ca3af;">
+      Dollar Risk: $${dollarRisk.toFixed(2)}
+    </div>
+  `;
       }
+
+      // Separate function for copy button
+      document.getElementById("copyButton").addEventListener("click", () => {
+        const textToCopy = "https://index-calculator-app.vercel.app/";
+
+        if (!navigator.clipboard) {
+          // fallback for older browsers
+          const input = document.createElement("input");
+          input.value = textToCopy;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          document.body.removeChild(input);
+          alert("Link copied to clipboard!");
+          return;
+        }
+
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => alert("Link copied to clipboard!"))
+          .catch((err) => alert("Failed to copy: " + err));
+      });
     </script>
   </body>
 </html>
